@@ -8,8 +8,11 @@ import {
   Menu,
   MenuItem,
   Divider,
+  Box,
 } from "@mui/material";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
+import SyncAltRoundedIcon from "@mui/icons-material/SyncAltRounded";
+import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import { ArrowDropDown } from "@mui/icons-material";
 
 const Navbar = () => {
@@ -25,20 +28,38 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="static" color="transparent" elevation={0}>
-        <Toolbar style={{ justifyContent: "space-between" }}>
-          <div>
-            <Typography variant="h5">Welcome, Shedrack</Typography>
+      <AppBar
+        position="fixed"
+        color="transparent"
+        elevation={0}
+        sx={{
+          boxShadow: "none",
+          width: "78vw",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+      >
+        <Toolbar sx={{ mt: "5px" }} style={{ justifyContent: "space-between" }}>
+          <Box>
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+              Welcome, Shedrack
+            </Typography>
             <Typography variant="body2" color="textSecondary">
               Good morning, have a great day!
             </Typography>
-          </div>
+          </Box>
 
-          <div>
+          <Box display="flex" alignItems="center">
             <Button
               color="inherit"
+              variant="outlined"
               startIcon={<ArrowDropDown />}
               onClick={handleMenuClick}
+              sx={{
+                border: "1px solid #ccc",
+                padding: "8px 16px",
+                borderRadius: "10px",
+                marginRight: "10px",
+              }}
             >
               Quick Actions
             </Button>
@@ -47,19 +68,30 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Action 1</MenuItem>
-              <MenuItem onClick={handleClose}>Action 2</MenuItem>
-              <MenuItem onClick={handleClose}>Action 3</MenuItem>
-              <MenuItem onClick={handleClose}>Action 4</MenuItem>
+              <MenuItem onClick={handleClose}>Send Money</MenuItem>
+              <Divider sx={{ backgroundColor: "#ccc", margin: "5px" }} />
+              <MenuItem onClick={handleClose}>
+                <SyncAltRoundedIcon sx={{ color: "#7105E9", margin: "0px" }} />
+                Fund Wallet
+              </MenuItem>
+              <Divider sx={{ backgroundColor: "#ccc", margin: "5px" }} />
+              <MenuItem onClick={handleClose}>Convert Funds</MenuItem>
+              <Divider sx={{ backgroundColor: "#ccc", margin: "5px" }} />
+              <MenuItem sx={{ mr: "10px" }} onClick={handleClose}>
+                <DescriptionRoundedIcon
+                  sx={{ margin: "0px", color: "#7105E9" }}
+                />
+                Create new invoice
+              </MenuItem>
             </Menu>
 
-            <IconButton color="inherit">
+            <IconButton sx={{ border: "1px solid #ccc", borderRadius: "50%" }}>
               <NotificationsRoundedIcon />
             </IconButton>
-          </div>
+          </Box>
         </Toolbar>
+        <Divider sx={{ mt: "19px", backgroundColor: "#ccc" }} />
       </AppBar>
-      <Divider sx={{ marginBottom: "20px", backgroundColor: "#000" }} />
     </>
   );
 };
