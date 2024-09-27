@@ -13,9 +13,14 @@ import {
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import SyncAltRoundedIcon from "@mui/icons-material/SyncAltRounded";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
-import { ArrowDropDown } from "@mui/icons-material";
+import {
+  ArrowDropDown,
+  AutorenewRounded,
+  RocketLaunchRounded,
+} from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
 
-const Navbar = () => {
+const Navbar = ({ onSidebarToggle }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenuClick = (event) => {
@@ -34,11 +39,19 @@ const Navbar = () => {
         elevation={0}
         sx={{
           boxShadow: "none",
-          width: "78vw",
-          zIndex: (theme) => theme.zIndex.drawer + 1,
+          width: { xs: "100%", md: "78vw" },
         }}
       >
         <Toolbar sx={{ mt: "5px" }} style={{ justifyContent: "space-between" }}>
+          <IconButton
+            edge="start"
+            aria-label="menu"
+            onClick={onSidebarToggle}
+            sx={{ display: { xs: "inline-flex", md: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
+
           <Box>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
               Welcome, Shedrack
@@ -68,18 +81,31 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Send Money</MenuItem>
+              <MenuItem onClick={handleClose}>
+                <RocketLaunchRounded
+                  sx={{ marginRight: "10px", color: "#7105E9" }}
+                />
+                Send Money
+              </MenuItem>
               <Divider sx={{ backgroundColor: "#ccc", margin: "5px" }} />
               <MenuItem onClick={handleClose}>
-                <SyncAltRoundedIcon sx={{ color: "#7105E9", margin: "0px" }} />
+                <SyncAltRoundedIcon
+                  sx={{ color: "#7105E9", marginRight: "10px" }}
+                />
                 Fund Wallet
               </MenuItem>
               <Divider sx={{ backgroundColor: "#ccc", margin: "5px" }} />
-              <MenuItem onClick={handleClose}>Convert Funds</MenuItem>
+              <MenuItem onClick={handleClose}>
+                {" "}
+                <AutorenewRounded
+                  sx={{ marginRight: "10px", color: "#7105E9" }}
+                />
+                Convert Funds
+              </MenuItem>
               <Divider sx={{ backgroundColor: "#ccc", margin: "5px" }} />
               <MenuItem sx={{ mr: "10px" }} onClick={handleClose}>
                 <DescriptionRoundedIcon
-                  sx={{ margin: "0px", color: "#7105E9" }}
+                  sx={{ marginRight: "10px", color: "#7105E9" }}
                 />
                 Create new invoice
               </MenuItem>
