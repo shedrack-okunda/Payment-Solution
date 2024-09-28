@@ -3,7 +3,7 @@ import React from "react";
 function Card() {
   return (
     <>
-      <h1>Hello world</h1>
+      <h1>Hello Country</h1>
     </>
   );
 }

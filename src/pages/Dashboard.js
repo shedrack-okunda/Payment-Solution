@@ -3,7 +3,7 @@ import React from "react";
 function Dashboard() {
   return (
     <>
-      <h1>Hello world</h1>
+      <h1 style={{ textAlign: "center" }}>This is the dashboard</h1>
     </>
   );
 }
