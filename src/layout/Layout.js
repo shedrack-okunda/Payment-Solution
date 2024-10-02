@@ -19,9 +19,20 @@ const Layout = ({ children }) => {
         isOpen={isSidebarOpen}
         onSidebarToggle={handleSidebarToggle}
       />
-      <Navbar onSidebarToggle={handleSidebarToggle} />
 
-      <Outlet />
+      <Box
+        component="main"
+        sx={{
+          paddingTop: "70px",
+          paddingRight: { xs: "600px", md: "700px" },
+          overflowY: "auto",
+          width: { xs: "100%", md: "100%" },
+        }}
+      >
+        <Navbar onSidebarToggle={handleSidebarToggle} />
+        {children}
+        <Outlet />
+      </Box>
     </Box>
   );
 };

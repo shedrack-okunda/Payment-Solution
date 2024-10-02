@@ -19,9 +19,36 @@ import {
   RocketLaunchRounded,
 } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useLocation } from "react-router";
 
 const Navbar = ({ onSidebarToggle }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const location = useLocation();
+
+  const getTitle = () => {
+    switch (location.pathname) {
+      case "/":
+        return {
+          title: "Welcome, Shedrack",
+          subtitle: "Good morning, have a great day!",
+        };
+      case "/invoices":
+        return { title: "Invoices" };
+      case "/cards":
+        return { title: "Cards" };
+      case "/wallets":
+        return { title: "Wallets" };
+      case "/transactions":
+        return { title: "Transactions" };
+      default:
+        return {
+          title: "Welcome, Shedrack",
+          subtitle: "Good morning, have a great day!",
+        };
+    }
+  };
+
+  const { title, subtitle } = getTitle();
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -53,11 +80,11 @@ const Navbar = ({ onSidebarToggle }) => {
           </IconButton>
 
           <Box>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              Welcome, Shedrack
+            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+              {title}
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              Good morning, have a great day!
+              {subtitle}
             </Typography>
           </Box>
 

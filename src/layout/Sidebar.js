@@ -19,7 +19,7 @@ import SyncAltRoundedIcon from "@mui/icons-material/SyncAltRounded";
 import { CloseRounded, ExitToApp } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ isOpen, onSidebarToggle, children }) => {
+const Sidebar = ({ isOpen, onSidebarToggle }) => {
   const items = [
     { text: "Dashboard", icon: <DashboardRoundedIcon />, path: "/" },
     { text: "Invoices", icon: <DescriptionRoundedIcon />, path: "/invoices" },
@@ -72,10 +72,18 @@ const Sidebar = ({ isOpen, onSidebarToggle, children }) => {
                 cursor: "pointer",
               }}
             >
-              <ListItemIcon sx={{ color: "#fff" }}>{item.icon} </ListItemIcon>
-              <ListItemText>
-                <Link to={item.path}>{item.text}</Link>
-              </ListItemText>
+              <Link
+                to={item.path}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <ListItemIcon sx={{ color: "#fff" }}>{item.icon} </ListItemIcon>
+                <ListItemText sx={{ color: "#fff" }}>{item.text}</ListItemText>
+              </Link>
             </ListItem>
           ))}
         </List>
@@ -112,22 +120,6 @@ const Sidebar = ({ isOpen, onSidebarToggle, children }) => {
           </IconButton>
         </Box>
       </Drawer>
-
-      <Box
-        component="main"
-        sx={{
-          marginTop: "30px",
-          marginLeft: { xs: 0, md: "150px" },
-          transition: "margin-left 0.3s ease",
-          flexGrow: 1,
-          padding: "10px",
-          // ml: `${sidebarWidth}px`,
-        }}
-      >
-        <Box sx={{ mt: "30px", padding: "10px", overflowY: "auto" }}>
-          {children}
-        </Box>
-      </Box>
     </Box>
   );
 };
