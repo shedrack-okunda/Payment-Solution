@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <Box display="flex" sx={{ minHeight: "90vh", overflowX: "hidden" }}>
+    <Box display="flex" sx={{ display: "flex" }}>
       <Sidebar
         setSidebarWidth={setSidebarWidth}
         isOpen={isSidebarOpen}
@@ -22,11 +22,9 @@ const Layout = ({ children }) => {
 
       <Box
         component="main"
+        // sx={{ display: "flex", flexDirection: "column" }}
         sx={{
-          paddingTop: "70px",
-          paddingRight: { xs: "600px", md: "700px" },
-          overflowY: "auto",
-          width: { xs: "100%", md: "100%" },
+          paddingTop: "80px",
         }}
       >
         <Navbar onSidebarToggle={handleSidebarToggle} />
