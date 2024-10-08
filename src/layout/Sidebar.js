@@ -16,7 +16,7 @@ import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import CreditCardRoundedIcon from "@mui/icons-material/CreditCardRounded";
 import WalletRoundedIcon from "@mui/icons-material/WalletRounded";
 import SyncAltRoundedIcon from "@mui/icons-material/SyncAltRounded";
-import { CloseRounded, ExitToApp } from "@mui/icons-material";
+import { ExitToApp } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const Sidebar = ({ isOpen, onSidebarToggle }) => {
@@ -33,94 +33,88 @@ const Sidebar = ({ isOpen, onSidebarToggle }) => {
   ];
 
   return (
-    <Box component={"div"} sx={{ width: "100%" }}>
-      <Drawer
-        variant="permanent"
-        anchor="left"
-        sx={{
-          width: 155,
+    <Drawer
+      variant="permanent"
+      anchor="left"
+      sx={{
+        width: 155,
 
-          flexShrink: 0,
-          display: { xs: "none", md: "block" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            backgroundColor: "#7105E9",
-            borderTopRightRadius: "20px",
-            borderBottomRightRadius: "20px",
-            color: "#fff",
-          },
+        flexShrink: 0,
+        display: { xs: "none", md: "block" },
+        "& .MuiDrawer-paper": {
+          boxSizing: "border-box",
+          backgroundColor: "#7105E9",
+          borderTopRightRadius: "20px",
+          borderBottomRightRadius: "20px",
+          color: "#fff",
+        },
+      }}
+    >
+      <Box sx={{ padding: "23px", textAlign: "center" }}>
+        <Typography variant="h4" component="div" style={{ fontWeight: "bold" }}>
+          FinPay
+        </Typography>
+      </Box>
+
+      <Divider sx={{ backgroundColor: "#ccc", marginBottom: "20px" }} />
+
+      <List>
+        {items.map((item, index) => (
+          <ListItem
+            button
+            key={index}
+            sx={{
+              cursor: "pointer",
+            }}
+          >
+            <Link
+              to={item.path}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textDecoration: "none",
+                color: "inherit",
+              }}
+            >
+              <ListItemIcon sx={{ color: "#fff" }}>{item.icon} </ListItemIcon>
+              <ListItemText sx={{ color: "#fff" }}>{item.text}</ListItemText>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+
+      <Divider sx={{ backgroundColor: "#fff", marginTop: "auto" }} />
+
+      <Box
+        sx={{
+          display: "flex",
+          padding: "10px",
+          textAlign: "center",
+          color: "#fff",
         }}
       >
-        <Box sx={{ padding: "23px", textAlign: "center" }}>
+        <Avatar
+          alt="Sheddy"
+          src=""
+          sx={{ width: 40, height: 40, margin: "0 auto" }}
+        />
+        <Box sx={{ marginBottom: "10px" }}>
           <Typography
-            variant="h4"
-            component="div"
-            style={{ fontWeight: "bold" }}
+            sx={{ fontWeight: "bold", marginRight: "40px" }}
+            variant="body1"
           >
-            FinPay
+            Shedrack Okunda
+          </Typography>
+          <Typography sx={{ marginLeft: "10px" }} variant="body2">
+            okundashedarck@gmail.com
           </Typography>
         </Box>
 
-        <Divider sx={{ backgroundColor: "#ccc", marginBottom: "20px" }} />
-
-        <List>
-          {items.map((item, index) => (
-            <ListItem
-              button
-              key={index}
-              sx={{
-                cursor: "pointer",
-              }}
-            >
-              <Link
-                to={item.path}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  textDecoration: "none",
-                  color: "inherit",
-                }}
-              >
-                <ListItemIcon sx={{ color: "#fff" }}>{item.icon} </ListItemIcon>
-                <ListItemText sx={{ color: "#fff" }}>{item.text}</ListItemText>
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-
-        <Divider sx={{ backgroundColor: "#fff", marginTop: "auto" }} />
-
-        <Box
-          sx={{
-            display: "flex",
-            padding: "10px",
-            textAlign: "center",
-            color: "#fff",
-          }}
-        >
-          <Avatar
-            alt="Sheddy"
-            src=""
-            sx={{ width: 40, height: 40, margin: "0 auto" }}
-          />
-          <Box sx={{ marginBottom: "10px" }}>
-            <Typography
-              sx={{ fontWeight: "bold", marginRight: "40px" }}
-              variant="body1"
-            >
-              Shedrack Okunda
-            </Typography>
-            <Typography sx={{ marginLeft: "10px" }} variant="body2">
-              okundashedarck@gmail.com
-            </Typography>
-          </Box>
-
-          <IconButton sx={{ color: "#fff", marginBottom: "15px" }}>
-            <ExitToApp />
-          </IconButton>
-        </Box>
-      </Drawer>
-    </Box>
+        <IconButton sx={{ color: "#fff", marginBottom: "15px" }}>
+          <ExitToApp />
+        </IconButton>
+      </Box>
+    </Drawer>
   );
 };
 

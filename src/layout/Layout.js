@@ -22,9 +22,9 @@ const Layout = ({ children }) => {
 
       <Box
         component="main"
-        // sx={{ display: "flex", flexDirection: "column" }}
         sx={{
           paddingTop: "80px",
+          marginLeft: { xs: "1px", md: `${sidebarWidth}px` },
         }}
       >
         <Navbar onSidebarToggle={handleSidebarToggle} />
