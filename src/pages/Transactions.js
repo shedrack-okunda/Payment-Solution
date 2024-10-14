@@ -20,7 +20,7 @@ import { FilterList, Search } from "@mui/icons-material";
 const transactions = [
   {
     date: "Aug 03",
-    sender: "Nnabuife",
+    sender: "Nnabuife Elijah",
     recipient: "Elijah",
     amount: "-$1,708",
     status: "Successful",
@@ -28,7 +28,7 @@ const transactions = [
   },
   {
     date: "Aug 03",
-    sender: "Nnabuife",
+    sender: "Nnabuife Elijah",
     recipient: "Elijah",
     amount: "-$1,708",
     status: "Refunded",
@@ -36,7 +36,7 @@ const transactions = [
   },
   {
     date: "Aug 03",
-    sender: "Nnabuife",
+    sender: "Nnabuife Elijah",
     recipient: "Elijah",
     amount: "-$1,708",
     status: "Successful",
@@ -44,7 +44,7 @@ const transactions = [
   },
   {
     date: "Aug 03",
-    sender: "Nnabuife",
+    sender: "Nnabuife Elijah",
     recipient: "Elijah",
     amount: "-$1,708",
     status: "Successful",
@@ -52,7 +52,7 @@ const transactions = [
   },
   {
     date: "Aug 03",
-    sender: "Nnabuife",
+    sender: "Nnabuife Elijah",
     recipient: "Elijah",
     amount: "-$1,708",
     status: "Successful",
