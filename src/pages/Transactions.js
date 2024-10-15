@@ -73,7 +73,42 @@ const columns = [
     width: 150,
     editable: true,
   },
-  { field: "status", headerName: "Status", width: 110, editable: true },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 110,
+    editable: true,
+    renderCell: (params) => {
+      let color;
+      let borderColor;
+
+      switch (params.value) {
+        case "Successful":
+          color = "#4caf50";
+          borderColor = "#388e3c";
+          break;
+        default:
+          color = "#000";
+          borderColor = "#000";
+          break;
+      }
+
+      return (
+        <span
+          style={{
+            padding: "5px 10px",
+            color: "#fff",
+            backgroundColor: color,
+            border: `2px solid ${borderColor}`,
+            borderRadius: "5px",
+            textAlign: "center",
+          }}
+        >
+          {params.value}
+        </span>
+      );
+    },
+  },
 
   {
     field: "type",
@@ -140,10 +175,6 @@ function Transaction() {
           disableRowSelectionOnClick
         ></DataGrid>
       </Box>
-
-      {/* <Typography variant="h6" mb={2}>
-        Recent Transactions
-      </Typography> */}
     </Box>
   );
 }

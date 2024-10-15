@@ -3,41 +3,29 @@ import {
   Avatar,
   Box,
   Button,
-  Card,
-  CardContent,
-  Chip,
   Divider,
   Grid2,
-  IconButton,
-  Pagination,
+  MenuItem,
   Paper,
+  Select,
   Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
   Typography,
 } from "@mui/material";
 import {
   ArrowForward,
   AutorenewRounded,
   CopyAll,
-  CopyAllRounded,
-  CopyAllTwoTone,
-  FilterList,
   KeyboardArrowDown,
   KeyboardArrowUp,
   RocketLaunchRounded,
-  Search,
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
+import { DataGrid } from "@mui/x-data-grid";
 
-const transactions = [
+const rows = [
   {
+    id: 1,
     date: "Aug 03",
     sender: "Nnabuife Elijah",
     recipient: "Elijah",
@@ -46,6 +34,7 @@ const transactions = [
     type: "Transfer",
   },
   {
+    id: 2,
     date: "Aug 03",
     sender: "Nnabuife Elijah",
     recipient: "Elijah",
@@ -54,6 +43,7 @@ const transactions = [
     type: "Transfer",
   },
   {
+    id: 3,
     date: "Aug 03",
     sender: "Nnabuife Elijah",
     recipient: "Elijah",
@@ -62,6 +52,7 @@ const transactions = [
     type: "Fund Wallet",
   },
   {
+    id: 4,
     date: "Aug 03",
     sender: "Nnabuife Elijah",
     recipient: "Elijah",
@@ -70,12 +61,79 @@ const transactions = [
     type: "Transfer",
   },
   {
+    id: 5,
     date: "Aug 03",
     sender: "Nnabuife Elijah",
     recipient: "Elijah",
     amount: "-$1,708",
     status: "Successful",
     type: "Transfer",
+  },
+];
+
+const columns = [
+  { field: "id", headerName: "ID", width: 50 },
+  { field: "date", headerName: "Date", editable: true },
+  {
+    field: "sender",
+    headerName: "Sender",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "amount",
+    headerName: "Amount",
+    type: "number",
+    width: 110,
+    editable: true,
+  },
+  {
+    field: "recipient",
+    headerName: "Recipient",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 110,
+    editable: true,
+    renderCell: (params) => {
+      let color;
+      let borderColor;
+
+      switch (params.value) {
+        case "Successful":
+          color = "#4caf50";
+          borderColor = "#388e3c";
+          break;
+        default:
+          color = "#000";
+          borderColor = "#000";
+          break;
+      }
+
+      return (
+        <span
+          style={{
+            padding: "5px 10px",
+            color: "#fff",
+            backgroundColor: color,
+            border: `2px solid ${borderColor}`,
+            borderRadius: "5px",
+            textAlign: "center",
+          }}
+        >
+          {params.value}
+        </span>
+      );
+    },
+  },
+
+  {
+    field: "type",
+    headerName: "Transaction Type",
+    width: 160,
   },
 ];
 
@@ -106,215 +164,270 @@ function Wallet() {
       </Stack>
 
       <Grid2 container spacing={2}>
-        <Card>
-          <CardContent>
-            <Box sx={{ backgroundColor: "#f0e6ff", padding: 1 }}>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Stack direction="row" spacing={1}>
-                  <Avatar sx={{ width: 30, height: 30 }} />
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    fontWeight="bold"
-                  >
-                    USD ($)
-                  </Typography>
-                </Stack>
-                <Button
-                  sx={{
-                    textTransform: "none",
-                    height: "40px",
-                    minWidth: 40,
-                    fontSize: "10px",
-                  }}
-                  variant="outlined"
-                  size="small"
-                  endIcon={
-                    <Stack
-                      direction="column"
-                      fontSize="10px"
-                      alignItems="center"
-                    >
-                      <KeyboardArrowUp fontSize="small" />
-                      <KeyboardArrowDown fontSize="small" />
-                    </Stack>
-                  }
-                >
-                  Switch
-                </Button>
-              </Stack>
-            </Box>
-
-            <Divider sx={{ border: "1px solid #ccc", width: "100%" }} />
-
+        <Paper>
+          <Box
+            sx={{
+              backgroundColor: "#f0e6ff",
+              padding: 2,
+              borderBottom: "2px solid #ccc",
+            }}
+          >
             <Stack
               direction="row"
               justifyContent="space-between"
               alignItems="center"
             >
-              <Box sx={{ p: 1 }}>
-                <Typography variant="h4" fontWeight="bold">
-                  {showBalance ? "$5,350" : "*****"}
-                </Typography>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  endIcon={showBalance ? <VisibilityOff /> : <Visibility />}
-                  sx={{
-                    color: "#7105E9",
-                    textTransform: "none",
-                    padding: "10px",
-                    mt: "30px",
-                    fontSize: "10px",
-                    border: "1px solid #ccc",
-                    height: "15px",
-                  }}
-                  onClick={toggleBalanceVisibility}
-                >
-                  {showBalance ? "Wallet Balance" : "Wallet Balance"}
-                </Button>
-              </Box>
-            </Stack>
-            <Button
-              variant="text"
-              endIcon={<ArrowForward />}
-              sx={{
-                textTransform: "none",
-                marginTop: "50px",
-                marginLeft: "150px",
-                color: "#7105E9",
-                fontSize: "10px",
-              }}
-            >
-              Account Statement
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent>
-            <Box sx={{ backgroundColor: "#f0e6ff", padding: 2 }}>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
+              <Stack direction="row" spacing={1}>
+                <Avatar sx={{ width: 30, height: 30 }} />
                 <Typography
-                  variant="h5"
+                  variant="body1"
                   sx={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                   }}
                   fontWeight="bold"
-                  fontSize="small"
                 >
-                  Receiving Account
+                  USD ($)
                 </Typography>
-
-                <Button
-                  sx={{
-                    textTransform: "none",
-                    height: "20px",
-                    fontSize: "10px",
-                    marginLeft: "30px",
-                  }}
-                  variant="outlined"
-                  size="small"
-                  endIcon={<ArrowForward />}
-                >
-                  View Details
-                </Button>
               </Stack>
-            </Box>
 
-            <Divider sx={{ border: "1px solid #ccc", width: "100%" }} />
+              <Select
+                sx={{
+                  textTransform: "none",
+                  height: "30px",
+                  minWidth: 30,
+                  fontSize: "10px",
+                }}
+                variant="outlined"
+                size="small"
+                IconComponent={() => (
+                  <Stack direction="column" fontSize="5px">
+                    <KeyboardArrowUp fontSize="small" />
+                    <KeyboardArrowDown fontSize="small" />
+                  </Stack>
+                )}
+                defaultValue="Switch"
+              >
+                <MenuItem value="Switch">Switch</MenuItem>
+              </Select>
+            </Stack>
+          </Box>
 
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Box sx={{ p: 2 }}>
-              <Typography variant="h6" fontSize="medium">
-                Elijah Nnabuife <CopyAll />
+              <Typography variant="h4" fontWeight="bold">
+                {showBalance ? "$5,350" : "*****"}
               </Typography>
-              <Typography variant="body2">Account Holder</Typography>
-              <Divider sx={{ my: 1, width: "80%" }} />
-              <Typography variant="h6" fontSize="medium">
-                Wells Fargo Bank, N.A. <CopyAll />
-              </Typography>
-              <Typography variant="body2">Bank Name</Typography>
-              <Divider sx={{ my: 1, width: "80%" }} />
-              <Typography variant="h6" fontSize="medium">
-                40630101689676683 <CopyAll />
-              </Typography>
-              <Typography variant="body2">Account Number</Typography>
+              <Button
+                variant="outlined"
+                size="small"
+                endIcon={showBalance ? <VisibilityOff /> : <Visibility />}
+                sx={{
+                  color: "#7105E9",
+                  textTransform: "none",
+                  padding: "10px",
+                  mt: "30px",
+                  fontSize: "10px",
+                  border: "1px solid #ccc",
+                  height: "15px",
+                }}
+                onClick={toggleBalanceVisibility}
+              >
+                {showBalance ? "Wallet Balance" : "Wallet Balance"}
+              </Button>
             </Box>
-          </CardContent>
-        </Card>
+          </Stack>
+          <Button
+            variant="text"
+            endIcon={<ArrowForward />}
+            sx={{
+              textTransform: "none",
+              marginTop: "50px",
+              marginLeft: "150px",
+              color: "#7105E9",
+              fontSize: "10px",
+            }}
+          >
+            Account Statement
+          </Button>
+        </Paper>
 
-        <Card style={{ padding: "20px" }}>
-          <CardContent>
-            <Typography>Income</Typography>
-            <Typography>$0.00</Typography>
-            <Typography>Expenses</Typography>
-            <Typography>$0.00</Typography>
-          </CardContent>
-        </Card>
+        <Paper>
+          <Box
+            sx={{
+              backgroundColor: "#f0e6ff",
+              padding: 2.6,
+              borderBottom: "2px solid #ccc",
+            }}
+          >
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                fontWeight="bold"
+                fontSize="small"
+              >
+                Receiving Account
+              </Typography>
+
+              <Button
+                sx={{
+                  textTransform: "none",
+                  height: "20px",
+                  fontSize: "10px",
+                  marginLeft: "30px",
+                }}
+                variant="outlined"
+                size="small"
+                endIcon={<ArrowForward />}
+              >
+                View Details
+              </Button>
+            </Stack>
+          </Box>
+
+          <Box sx={{ p: 2 }}>
+            <Typography variant="h6" fontSize="medium">
+              Elijah Nnabuife <CopyAll />
+            </Typography>
+            <Typography variant="body2">Account Holder</Typography>
+            <Divider sx={{ my: 1, width: "80%" }} />
+            <Typography variant="h6" fontSize="medium">
+              Wells Fargo Bank, N.A. <CopyAll />
+            </Typography>
+            <Typography variant="body2">Bank Name</Typography>
+            <Divider sx={{ my: 1, width: "80%" }} />
+            <Typography variant="h6" fontSize="medium">
+              40630101689676683 <CopyAll />
+            </Typography>
+            <Typography variant="body2">Account Number</Typography>
+          </Box>
+        </Paper>
+
+        <Paper>
+          <Box
+            sx={{
+              backgroundColor: "#f0e6ff",
+              padding: 2.6,
+              borderBottom: "2px solid #ccc",
+            }}
+          >
+            <Typography
+              variant="h5"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+              fontWeight="bold"
+              fontSize="small"
+            >
+              Expenses
+            </Typography>
+          </Box>
+
+          <Box
+            sx={{
+              p: 2,
+              display: "flex",
+              justifyContent: "center",
+              gap: 15,
+              alignItems: "center",
+            }}
+          >
+            <Box>
+              <Typography>$0.00</Typography>
+              <Typography>Income</Typography>
+            </Box>
+            <Box>
+              <Typography>$0.00</Typography>
+              <Typography>Expenses</Typography>
+            </Box>
+          </Box>
+
+          <Box
+            sx={{
+              backgroundColor: "#ccc",
+              margin: "10px",
+              padding: "20px 30px",
+              borderRadius: "10px",
+            }}
+          />
+
+          <Box sx={{ p: 2, display: "flex", gap: "40px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "5px",
+              }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: "#7105E9",
+                  height: "15px",
+                  width: "15px",
+                  borderRadius: "50%",
+                }}
+              />
+              <Typography>Income</Typography>
+            </Box>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "5px",
+              }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: "#7105E9",
+                  height: "15px",
+                  width: "15px",
+                  borderRadius: "50%",
+                }}
+              />
+              <Typography>Expenses</Typography>
+            </Box>
+          </Box>
+        </Paper>
       </Grid2>
 
-      <Box sx={{ mt: 3 }}>
-        <Typography variant="h6" mb={2}>
-          Recent Transactions
-        </Typography>
-
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Sender</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Recipient</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Type</TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {transactions.map((tx, index) => (
-                <TableRow key={index}>
-                  <TableCell>{tx.date}</TableCell>
-                  <TableCell>{tx.sender}</TableCell>
-                  <TableCell>{tx.amount}</TableCell>
-                  <TableCell>{tx.recipient}</TableCell>
-                  <TableCell>
-                    <Chip
-                      label={tx.status}
-                      color={tx.status === "Successful" ? "success" : "default"}
-                      variant="outlined"
-                    />
-                  </TableCell>
-                  <TableCell>{tx.type}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          mt={3}
-        >
-          <Typography variant="body2">1-5 of 5</Typography>
-          <Pagination count={1} page={1} />
-        </Box>
+      <Box
+        sx={{
+          height: 400,
+          marginTop: "30px",
+          width: { xs: "100%", md: "900px" },
+        }}
+      >
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          pageSizeOptions={[5]}
+          disableRowSelectionOnClick
+        ></DataGrid>
       </Box>
     </Box>
   );
