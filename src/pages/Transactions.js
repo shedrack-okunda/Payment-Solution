@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, TextField, Typography } from "@mui/material";
+import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
 import { FilterList, Search } from "@mui/icons-material";
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -76,7 +76,7 @@ const columns = [
   {
     field: "status",
     headerName: "Status",
-    width: 110,
+    width: 150,
     editable: true,
     renderCell: (params) => {
       let color;
@@ -94,18 +94,18 @@ const columns = [
       }
 
       return (
-        <span
-          style={{
-            padding: "5px 10px",
+        <Button
+          sx={{
+            textTransform: "none",
+            padding: "5px 15px",
             color: "#fff",
             backgroundColor: color,
             border: `2px solid ${borderColor}`,
-            borderRadius: "5px",
-            textAlign: "center",
+            borderRadius: "30px",
           }}
         >
           {params.value}
-        </span>
+        </Button>
       );
     },
   },
@@ -119,48 +119,49 @@ const columns = [
 
 function Transaction() {
   return (
-    <Box component="div" sx={{ p: 3 }}>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Box
+    <Box sx={{ p: 3 }}>
+      <Box
+        sx={{
+          marginTop: "15px",
+          marginBottom: "30px",
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+          width: "100%",
+        }}
+      >
+        <TextField
+          placeholder="Search for a transaction"
+          InputProps={{
+            startAdornment: (
+              <IconButton>
+                <Search />
+              </IconButton>
+            ),
+          }}
           sx={{
-            margin: "15px",
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            width: "100%",
+            backgroundColor: "#f9f9f9",
+            borderRadius: "10px",
+            width: { xs: "50%", md: "100%" },
+          }}
+        />
+        <IconButton
+          sx={{
+            borderRadius: "10px",
+            height: "55px",
+            padding: "10px 10px",
+            border: "1px solid #ddd",
+            width: { xs: "auto", md: "auto" },
           }}
         >
-          <TextField
-            placeholder="Search for a transaction"
-            InputProps={{
-              startAdornment: (
-                <IconButton>
-                  <Search />
-                </IconButton>
-              ),
-            }}
-            sx={{
-              backgroundColor: "#f9f9f9",
-              borderRadius: "8px",
-              width: { xs: "30%", md: "100%" },
-            }}
-          />
-          <IconButton
-            sx={{
-              borderRadius: "10px",
-              height: "55px",
-              padding: "10px 30px",
-              border: "1px solid #ddd",
-              width: { xs: "auto", md: "auto" },
-            }}
-          >
-            <Typography sx={{ mr: "2px" }}>Filter</Typography>
-            <FilterList />
-          </IconButton>
-        </Box>
+          <Typography variant="body2" sx={{ mr: "2px" }}>
+            Filter
+          </Typography>
+          <FilterList />
+        </IconButton>
       </Box>
 
-      <Box sx={{ height: 400, width: { xs: "100%", md: "900px" } }}>
+      <Box sx={{ height: 400, width: { xs: "100%", md: "100%" } }}>
         <DataGrid
           rows={rows}
           columns={columns}
