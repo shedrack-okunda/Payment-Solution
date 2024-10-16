@@ -1,18 +1,9 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-} from "@mui/material";
-import Search from "@mui/icons-material/Search";
-import FilterList from "@mui/icons-material/FilterList";
+import { Box, Button, Paper, Tab, Tabs, Typography } from "@mui/material";
+
 import { ArrowForward } from "@mui/icons-material";
 import DescriptionRounded from "@mui/icons-material/DescriptionRounded";
+import SearchBar from "../components/Searchbar";
 
 function Invoice() {
   const [tabValue, setTabValue] = useState(0);
@@ -23,84 +14,47 @@ function Invoice() {
 
   return (
     <Box sx={{ p: 3 }}>
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Box
-          sx={{
-            margin: "15px",
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            width: "100%",
-          }}
-        >
-          <TextField
-            placeholder="Search for an invoice"
-            InputProps={{
-              startAdornment: (
-                <IconButton>
-                  <Search />
-                </IconButton>
-              ),
-            }}
-            sx={{
-              backgroundColor: "#f9f9f9",
-              borderRadius: "8px",
-              width: { xs: "30%", md: "100%" },
-            }}
-          />
-          <IconButton
-            sx={{
-              borderRadius: "10px",
-              height: "55px",
-              padding: "10px 30px",
-              border: "1px solid #ddd",
-              width: { xs: "auto", md: "auto" },
-            }}
-          >
-            <Typography sx={{ mr: "2px" }}>Filter</Typography>
-            <FilterList />
-          </IconButton>
-        </Box>
+      <Box>
+        <SearchBar />
       </Box>
 
-      <Box
-        sx={{
-          height: "350px",
-          borderRadius: "10px",
-          border: "1px solid #ccc",
-          margin: "15px",
-          width: { xs: "50%", md: "100%" },
-        }}
-      >
-        <Tabs
-          value={tabValue}
-          onChange={handleTabChange}
-          aria-label="invoice tabs"
+      <Paper sx={{ width: { xs: "50%", md: "100%" } }}>
+        <Box
           sx={{
-            marginTop: 2,
-            "& .MuiTab-root": { textTransform: "none", minWidth: 120 },
-            "& .MuiTabs-indicator": { backgroundColor: "#8A56AC" },
+            borderBottom: "2px solid #ddd",
+            backgroundColor: "#ccc",
           }}
         >
-          <Tab label="All invoices" />
-          <Tab label="Draft" />
-          <Tab label="Pending" />
-          <Tab label="Processing" />
-          <Tab label="Paid" />
-          <Tab label="Due" />
-          <Tab label="Overdue" />
-        </Tabs>
-
-        <Divider />
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            aria-label="invoice tabs"
+            sx={{
+              marginTop: 2,
+              "& .MuiTab-root": { textTransform: "none", minWidth: 120 },
+              "& .MuiTabs-indicator": { backgroundColor: "#8A56AC" },
+            }}
+          >
+            <Tab label="All invoices" />
+            <Tab label="Draft" />
+            <Tab label="Pending" />
+            <Tab label="Processing" />
+            <Tab label="Paid" />
+            <Tab label="Due" />
+            <Tab label="Overdue" />
+          </Tabs>
+        </Box>
 
         <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          mt={4}
+          sx={{
+            p: 3,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <DescriptionRounded sx={{ fontSize: 50, mt: 3 }} />
+          <DescriptionRounded sx={{ fontSize: "5rem", mt: 3 }} />
           <Typography variant="h4" sx={{ marginTop: 1, fontWeight: "bold" }}>
             No payments
           </Typography>
@@ -120,13 +74,14 @@ function Invoice() {
               borderRadius: "10px",
               marginTop: 3,
               textTransform: "none",
-              padding: "10px 70px",
+              padding: "10px 100px",
             }}
+            endIcon={<ArrowForward />}
           >
-            New invoice <ArrowForward />
+            New invoice
           </Button>
         </Box>
-      </Box>
+      </Paper>
     </Box>
   );
 }
