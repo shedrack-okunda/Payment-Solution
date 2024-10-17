@@ -25,7 +25,7 @@ const SearchBar = () => {
             ),
           }}
           sx={{
-            backgroundColor: "#f9f9f9",
+            backgroundColor: "#F9F5FF",
             borderRadius: "10px",
             width: { xs: "50%", md: "100%" },
           }}

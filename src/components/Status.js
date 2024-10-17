@@ -119,13 +119,14 @@ const columns = [
 const Status = () => {
   return (
     <Paper>
-      <Box>
-        <Typography
-          variant="h5"
-          sx={{ p: 2, backgroundColor: "#ddd", borderBottom: "2px solid #ccc" }}
-        >
-          Recent Transactions
-        </Typography>
+      <Box
+        sx={{
+          p: 2,
+          backgroundColor: "#F9F5FF",
+          borderBottom: "2px solid #ccc",
+        }}
+      >
+        <Typography variant="h5">Recent Transactions</Typography>
       </Box>
 
       <Box sx={{ height: 400, width: { xs: "100%", md: "100%" } }}>
