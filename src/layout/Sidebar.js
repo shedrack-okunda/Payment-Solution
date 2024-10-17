@@ -37,26 +37,28 @@ const Sidebar = ({ isOpen, onSidebarToggle }) => {
       variant="permanent"
       anchor="left"
       sx={{
-        width: 155,
-
-        flexShrink: 0,
+        width: "140px",
         display: { xs: "none", md: "block" },
         "& .MuiDrawer-paper": {
           boxSizing: "border-box",
           backgroundColor: "#7105E9",
-          borderTopRightRadius: "20px",
-          borderBottomRightRadius: "20px",
+          borderTopRightRadius: "10px",
+          borderBottomRightRadius: "10px",
           color: "#fff",
         },
       }}
     >
-      <Box sx={{ padding: "23px", textAlign: "center" }}>
+      <Box
+        sx={{
+          p: 2.85,
+          textAlign: "center",
+          borderBottom: "2px solid #ccc",
+        }}
+      >
         <Typography variant="h4" component="div" style={{ fontWeight: "bold" }}>
           FinPay
         </Typography>
       </Box>
-
-      <Divider sx={{ backgroundColor: "#ccc", marginBottom: "20px" }} />
 
       <List>
         {items.map((item, index) => (

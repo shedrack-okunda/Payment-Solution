@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 const Layout = ({ children }) => {
-  const [sidebarWidth, setSidebarWidth] = useState(155);
+  const [sidebarWidth, setSidebarWidth] = useState(150);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleSidebarToggle = () => {
@@ -23,6 +23,7 @@ const Layout = ({ children }) => {
       <Box
         component="main"
         sx={{
+          p: 2,
           paddingTop: "80px",
           marginLeft: { xs: "1px", md: `${sidebarWidth}px` },
         }}
