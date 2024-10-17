@@ -7,7 +7,6 @@ import {
   Button,
   Menu,
   MenuItem,
-  Divider,
   Box,
 } from "@mui/material";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
@@ -18,8 +17,14 @@ import {
   AutorenewRounded,
   RocketLaunchRounded,
 } from "@mui/icons-material";
-import MenuIcon from "@mui/icons-material/Menu";
 import { useLocation } from "react-router";
+
+const actions = [
+  { icon: <RocketLaunchRounded />, text: "Send Money" },
+  { icon: <SyncAltRoundedIcon />, text: "Fund Wallet" },
+  { icon: <AutorenewRounded />, text: "Convert Funds" },
+  { icon: <DescriptionRoundedIcon />, text: "Create new invoice" },
+];
 
 const Navbar = ({ onSidebarToggle }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -69,73 +74,49 @@ const Navbar = ({ onSidebarToggle }) => {
           width: { xs: "100%", md: "78vw" },
         }}
       >
-        <Toolbar sx={{ mt: "5px" }} style={{ justifyContent: "space-between" }}>
-          <IconButton
-            edge="start"
-            aria-label="menu"
-            onClick={onSidebarToggle}
-            sx={{ display: { xs: "inline-flex", md: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-
+        <Toolbar
+          sx={{ p: 1.2, mt: "5px", borderBottom: "2px solid #ccc" }}
+          style={{ justifyContent: "space-between" }}
+        >
           <Box>
-            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-              {title}
-            </Typography>
+            <Typography variant="h4">{title}</Typography>
             <Typography variant="body2" color="textSecondary">
               {subtitle}
             </Typography>
           </Box>
 
-          <Box display="flex" alignItems="center">
+          <Box display="flex" gap={2} alignItems="center">
             <Button
               color="inherit"
               variant="outlined"
               startIcon={<ArrowDropDown />}
               onClick={handleMenuClick}
               sx={{
+                textTransform: "none",
                 border: "1px solid #ccc",
-                padding: "8px 16px",
+                padding: "5px 10px",
                 borderRadius: "10px",
-                marginRight: "10px",
               }}
             >
               Quick Actions
             </Button>
+
             <Menu
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>
-                <RocketLaunchRounded
-                  sx={{ marginRight: "10px", color: "#7105E9" }}
-                />
-                Send Money
-              </MenuItem>
-              <Divider sx={{ backgroundColor: "#ccc", margin: "5px" }} />
-              <MenuItem onClick={handleClose}>
-                <SyncAltRoundedIcon
-                  sx={{ color: "#7105E9", marginRight: "10px" }}
-                />
-                Fund Wallet
-              </MenuItem>
-              <Divider sx={{ backgroundColor: "#ccc", margin: "5px" }} />
-              <MenuItem onClick={handleClose}>
-                {" "}
-                <AutorenewRounded
-                  sx={{ marginRight: "10px", color: "#7105E9" }}
-                />
-                Convert Funds
-              </MenuItem>
-              <Divider sx={{ backgroundColor: "#ccc", margin: "5px" }} />
-              <MenuItem sx={{ mr: "10px" }} onClick={handleClose}>
-                <DescriptionRoundedIcon
-                  sx={{ marginRight: "10px", color: "#7105E9" }}
-                />
-                Create new invoice
-              </MenuItem>
+              {actions.map((action) => (
+                <Box sx={{ p: 1 }}>
+                  <MenuItem
+                    onClick={handleClose}
+                    sx={{ borderBottom: "1px solid #ccc", gap: 1 }}
+                  >
+                    <Box sx={{ color: "#7105E9" }}>{action.icon}</Box>
+                    {action.text}
+                  </MenuItem>
+                </Box>
+              ))}
             </Menu>
 
             <IconButton sx={{ border: "1px solid #ccc", borderRadius: "50%" }}>
@@ -143,7 +124,6 @@ const Navbar = ({ onSidebarToggle }) => {
             </IconButton>
           </Box>
         </Toolbar>
-        <Divider sx={{ mt: "19px", backgroundColor: "#ccc" }} />
       </AppBar>
     </>
   );
