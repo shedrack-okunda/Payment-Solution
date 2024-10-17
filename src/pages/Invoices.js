@@ -22,7 +22,7 @@ function Invoice() {
         <Box
           sx={{
             borderBottom: "2px solid #ddd",
-            backgroundColor: "#ccc",
+            backgroundColor: "#F9F5FF",
           }}
         >
           <Tabs

@@ -21,120 +21,11 @@ import {
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
-import { DataGrid } from "@mui/x-data-grid";
+import Status from "../components/Status";
 
-const rows = [
-  {
-    id: 1,
-    date: "Aug 03",
-    sender: "Nnabuife Elijah",
-    recipient: "Elijah",
-    amount: "-$1,708",
-    status: "Successful",
-    type: "Transfer",
-  },
-  {
-    id: 2,
-    date: "Aug 03",
-    sender: "Nnabuife Elijah",
-    recipient: "Elijah",
-    amount: "-$1,708",
-    status: "Refunded",
-    type: "Transfer",
-  },
-  {
-    id: 3,
-    date: "Aug 03",
-    sender: "Nnabuife Elijah",
-    recipient: "Elijah",
-    amount: "-$1,708",
-    status: "Successful",
-    type: "Fund Wallet",
-  },
-  {
-    id: 4,
-    date: "Aug 03",
-    sender: "Nnabuife Elijah",
-    recipient: "Elijah",
-    amount: "-$1,708",
-    status: "Successful",
-    type: "Transfer",
-  },
-  {
-    id: 5,
-    date: "Aug 03",
-    sender: "Nnabuife Elijah",
-    recipient: "Elijah",
-    amount: "-$1,708",
-    status: "Successful",
-    type: "Transfer",
-  },
-];
-
-const columns = [
-  { field: "id", headerName: "ID", width: 50 },
-  { field: "date", headerName: "Date", editable: true },
-  {
-    field: "sender",
-    headerName: "Sender",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "amount",
-    headerName: "Amount",
-    type: "number",
-    width: 110,
-    editable: true,
-  },
-  {
-    field: "recipient",
-    headerName: "Recipient",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "status",
-    headerName: "Status",
-    width: 110,
-    editable: true,
-    renderCell: (params) => {
-      let color;
-      let borderColor;
-
-      switch (params.value) {
-        case "Successful":
-          color = "#4caf50";
-          borderColor = "#388e3c";
-          break;
-        default:
-          color = "#000";
-          borderColor = "#000";
-          break;
-      }
-
-      return (
-        <span
-          style={{
-            padding: "5px 10px",
-            color: "#fff",
-            backgroundColor: color,
-            border: `2px solid ${borderColor}`,
-            borderRadius: "5px",
-            textAlign: "center",
-          }}
-        >
-          {params.value}
-        </span>
-      );
-    },
-  },
-
-  {
-    field: "type",
-    headerName: "Transaction Type",
-    width: 160,
-  },
+const buttons = [
+  { text: "Send Money", icon: <RocketLaunchRounded /> },
+  { text: "Convert Funds", icon: <AutorenewRounded /> },
 ];
 
 function Wallet() {
@@ -146,28 +37,22 @@ function Wallet() {
   return (
     <Box sx={{ p: 3 }}>
       <Stack direction="row" spacing={2} marginBottom={4} marginTop={2}>
-        <Button
-          variant="outlined"
-          startIcon={<RocketLaunchRounded />}
-          sx={{ textTransform: "none", fontWeight: "bold" }}
-        >
-          Send Money
-        </Button>
-
-        <Button
-          variant="outlined"
-          startIcon={<AutorenewRounded />}
-          sx={{ textTransform: "none", fontWeight: "bold" }}
-        >
-          Convert Funds
-        </Button>
+        {buttons.map((button) => (
+          <Button
+            variant="outlined"
+            startIcon={button.icon}
+            sx={{ p: 1, textTransform: "none", fontWeight: 600 }}
+          >
+            {button.text}
+          </Button>
+        ))}
       </Stack>
 
       <Grid2 container spacing={2}>
         <Paper>
           <Box
             sx={{
-              backgroundColor: "#f0e6ff",
+              backgroundColor: "#F9F5FF",
               padding: 2,
               borderBottom: "2px solid #ccc",
             }}
@@ -260,7 +145,7 @@ function Wallet() {
         <Paper>
           <Box
             sx={{
-              backgroundColor: "#f0e6ff",
+              backgroundColor: "#F9F5FF",
               padding: 2.6,
               borderBottom: "2px solid #ccc",
             }}
@@ -320,7 +205,7 @@ function Wallet() {
         <Paper>
           <Box
             sx={{
-              backgroundColor: "#f0e6ff",
+              backgroundColor: "#F9F5FF",
               padding: 2.6,
               borderBottom: "2px solid #ccc",
             }}
@@ -359,7 +244,7 @@ function Wallet() {
 
           <Box
             sx={{
-              backgroundColor: "#ccc",
+              backgroundColor: "#F9F5FF",
               margin: "10px",
               padding: "20px 30px",
               borderRadius: "10px",
@@ -408,26 +293,8 @@ function Wallet() {
         </Paper>
       </Grid2>
 
-      <Box
-        sx={{
-          height: 400,
-          marginTop: "30px",
-          width: { xs: "100%", md: "900px" },
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
-              },
-            },
-          }}
-          pageSizeOptions={[5]}
-          disableRowSelectionOnClick
-        ></DataGrid>
+      <Box sx={{ mt: 4 }}>
+        <Status />
       </Box>
     </Box>
   );
