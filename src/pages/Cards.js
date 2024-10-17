@@ -11,7 +11,7 @@ function Card() {
             sx={{
               p: 2,
               borderBottom: "2px solid #ccc",
-              backgroundColor: "#f0e6ff",
+              backgroundColor: "#F9F5FF",
             }}
           >
             <Typography variant="h6">Cards</Typography>
